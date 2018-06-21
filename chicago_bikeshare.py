@@ -43,8 +43,8 @@ input("Press Enter to continue...")
 # %%TASK 2
 # TODO: Print the `gender` of the first 20 rows
 print("\nTASK 2: Printing the genders of the first 20 samples")
-for i in range(20):
-    print(data_list[i][-2])
+for index in range(20):
+    print(data_list[index][-2])
 
 # Cool! We can get the rows(samples) iterating with a for and the columns(features) by index.
 # But it's still hard to get a column in a list. Example: List with all genders
@@ -85,10 +85,10 @@ input("Press Enter to continue...")
 # TODO: Count each gender. You should not use a function to do that.
 male = 0
 female = 0
-for g in column_to_list(data_list, -2):
-    if g == "Male":
+for gender in column_to_list(data_list, -2):
+    if gender == "Male":
         male += 1
-    elif g == "Female":
+    elif gender == "Female":
         female += 1
 
 # Checking the result
@@ -185,15 +185,18 @@ input("Press Enter to continue...")
 print("\nTASK 7: Check the chart!")
 customer = 0
 subscriber = 0
-for v in column_to_list(data_list, -3):
-    if v == "Subscriber":
+dependent = 0
+for item in column_to_list(data_list, -3):
+    if item == "Subscriber":
         subscriber += 1
-    elif v == "Customer":
+    elif item == "Customer":
         customer += 1
+    else:
+        dependent += 1
 
-types = ["Subscriber", "Customer"]
+types = ["Subscriber", "Customer", "Dependent"]
 y_pos = list(range(len(types)))
-plt.bar(y_pos, [subscriber, customer])
+plt.bar(y_pos, [subscriber, customer, dependent])
 plt.ylabel('Quantity')
 plt.xlabel('User Type')
 plt.xticks(y_pos, types)
@@ -225,11 +228,14 @@ middle_point = n // 2
 min_trip = trip_duration_list[0]
 max_trip = trip_duration_list[-1]
 
+# Here we calculate the mean
 sum_ = 0
-for x in trip_duration_list:
-    sum_ += x
+for duration in trip_duration_list:
+    sum_ += duration
 
 mean_trip = sum_ / n
+
+# Calculate the median
 median_trip = trip_duration_list[middle_point + 1] if n % 2 else \
     (trip_duration_list[middle_point] + trip_duration_list[middle_point + 1]) / 2
 
